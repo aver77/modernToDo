@@ -374,9 +374,6 @@ const GlobalStyles = createGlobalStyle`
             font-family: 'Montserrat';
             position: relative;
             background: #E7D6AC;
-            /* background-repeat: no-repeat;
-            background-size: cover; */
-            height: 100vh;
         }
     }
 `;

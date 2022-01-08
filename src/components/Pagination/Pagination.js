@@ -1,6 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const PaginationWrapper = styled.div`
+`;
+const PaginationUl = styled.ul`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+const PaginationLi = styled.li`
+`;
+const PaginationLiItem = styled.a`
+    &:focus,&:hover,&:active {
+        opacity: 0.6;
+    }
+`;
+const PaginationLiText= styled.span`
+    font-size: 20px;
+    padding: 0 2px 0 2px;
+`;
+
 //компонент с кнопками (ссылками)
 const Pagination = ({currentIndex, tasksPerPage, totalTasks, paginate}) => {
     const totalPagesAmount =  Math.ceil(totalTasks / tasksPerPage);
@@ -9,20 +28,6 @@ const Pagination = ({currentIndex, tasksPerPage, totalTasks, paginate}) => {
     for (let i=1; i<=totalPagesAmount; i++) { //1,2,3,4,5,6,7,8
         pageOfAllNumbers.push(i);
     }
-
-    const PaginationWrapper = styled.div`
-    `;
-    const PaginationUl = styled.ul`
-    `;
-    const PaginationLi = styled.li`
-    `;
-    const PaginationLiItem = styled.a`
-        &:focus,&:hover,&:active {
-            opacity: 0.6;
-        }
-    `;
-    const PaginationLiText= styled.span`
-    `;
 
     const ViewLiItem = ({number = null}) => {
         return (

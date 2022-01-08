@@ -1,34 +1,37 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 
-import Tasks from '../components/Tasks/Tasks';
+import TasksItem from '../components/Tasks/TasksItem';
+import { useSelector } from 'react-redux';
 
 const TasksPageWrapper = styled.div`
-    padding-top: 48px;
+    padding-top: 112px;
+    @media screen and (max-width: 793px) {
+        padding-top: 176px;
+    }
 `;
 
-const LikedPage = ({allTasks}) => {
-    let likedTasks = [];
-    if (allTasks) {
-        likedTasks = allTasks.map(item => 
-            item.liked === true
-        );
-    }
+const LikedPage = () => {
+    const tasksForAll = useSelector(state => state.tasksSlice.allTasks);
+    const allTasks = useMemo(() => tasksForAll, [tasksForAll]);
+
+    const likedTasks = useMemo(() => {
+        let tasksForLike = [];
+        if (allTasks) {
+            allTasks.forEach(item => {
+                if (item.liked === true) {
+                    tasksForLike.push(item);
+                }
+            })
+        }
+        return tasksForLike;
+    },[allTasks])
 
     return (
         <TasksPageWrapper className="__container">
-            <Tasks name="liked" tasks={likedTasks}/>
+            <TasksItem name="liked" tasks={likedTasks}/>
         </TasksPageWrapper>
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        allTasks: state.allTasks
-    }
-}
-
-const mapDispatchToProps = {}
-
-export default connect(mapStateToProps,mapDispatchToProps)(LikedPage);
+export default LikedPage;

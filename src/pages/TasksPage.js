@@ -1,27 +1,22 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import Tasks from '../components/Tasks/Tasks';
+import TasksItem from '../components/Tasks/TasksItem';
 
 const TasksPageWrapper = styled.div`
     padding-top: 48px;
 `;
 
-const TasksPage = ({allTasks}) => {
+const TasksPage = () => {
+    const tasksForAll = useSelector(state => state.tasksSlice.allTasks);
+    const allTasks = useMemo(() => tasksForAll, [tasksForAll]);
+
     return (
         <TasksPageWrapper className="__container">
-            <Tasks name="allTasks" tasks={allTasks}/>
+            <TasksItem name="allTasks" tasks={allTasks}/>
         </TasksPageWrapper>
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        allTasks: state.allTasks
-    }
-}
-
-const mapDispatchToProps = {}
-
-export default connect(mapStateToProps,mapDispatchToProps)(TasksPage);
+export default TasksPage;

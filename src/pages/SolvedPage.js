@@ -1,34 +1,37 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 
-import Tasks from '../components/Tasks/Tasks';
+import TasksItem from '../components/Tasks/TasksItem';
 
 const TasksPageWrapper = styled.div`
-    padding-top: 48px;
+    padding-top: 112px;
+    @media screen and (max-width: 793px) {
+        padding-top: 176px;
+    }
 `;
 
-const SolvedPage = ({allTasks}) => {
-    let solvedTasks = [];
-    if (allTasks) {
-        solvedTasks = allTasks.map(item => 
-            item.solved === true
-        );
-    }
+const SolvedPage = () => {
+    const tasksForAll = useSelector(state => state.tasksSlice.allTasks);
+    const allTasks = useMemo(() => tasksForAll, [tasksForAll]);
+
+    const solvedTasks = useMemo(() => {
+        let tasksForSolve = [];
+        if (allTasks) {
+            allTasks.forEach(item => {
+                if (item.solved === true) {
+                    tasksForSolve.push(item);
+                }
+            })
+        }
+        return tasksForSolve;
+    },[allTasks])
 
     return (
         <TasksPageWrapper className="__container">
-            <Tasks name="solved" tasks={solvedTasks}/>
+            <TasksItem name="solved" tasks={solvedTasks}/>
         </TasksPageWrapper>
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        allTasks: state.allTasks
-    }
-}
-
-const mapDispatchToProps = {}
-
-export default connect(mapStateToProps,mapDispatchToProps)(SolvedPage);
+export default SolvedPage;

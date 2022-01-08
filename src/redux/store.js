@@ -1,7 +1,9 @@
-import { createStore } from "redux"
-import reducer from './reducer';
-import {bindActionCreators} from 'redux'
+import { configureStore } from '@reduxjs/toolkit';
+import tasksSlice from './tasksSlice';
 
-const store = createStore(reducer);
+const store = configureStore({
+    reducer: { tasksSlice },
+    devTools: true
+});
 
 export default store;
