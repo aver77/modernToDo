@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const PaginationWrapper = styled.div`
 `;
@@ -15,9 +15,12 @@ const PaginationLiItem = styled.li`
 `;
 
 const PaginationLiText= styled.span`
-    font-size: 20px;
-    padding: 0 2px 0 2px;
-    color: ${props => props.textColor || 'black'};
+    font-size: 24px;
+    padding: 0 6px 0 6px;
+    ${props => props.highlightStyles && css`
+        text-shadow: 0 0 2px black;
+        font-weight: 500; 
+    `}
 `;
 
 const Pagination = ({pagesAmount, currentPage, maxPageNumberLimit, minPageNumberLimit, handleBtnPageClick}) => {
@@ -39,7 +42,7 @@ const Pagination = ({pagesAmount, currentPage, maxPageNumberLimit, minPageNumber
                                 id={numberBtn}
                                 onClick={handleBtnPageClick}
                             >
-                                <PaginationLiText textColor={currentPage === numberBtn?'red':null}>{numberBtn}</PaginationLiText>
+                                <PaginationLiText highlightStyles={currentPage === numberBtn? true : false}>{numberBtn}</PaginationLiText>
                             </PaginationLiItem>
                             )
                         }
@@ -54,13 +57,3 @@ const Pagination = ({pagesAmount, currentPage, maxPageNumberLimit, minPageNumber
 };
 
 export default Pagination;
-
-//     const ViewLiItem = ({number = null}) => {
-//     return (
-//         <PaginationLiItem 
-//             onClick={() => number?handleBtnPageClick(number): null}
-//         >
-//             <PaginationLiText>{number?number: <>&hellip;</>}</PaginationLiText>
-//         </PaginationLiItem>
-//     );
-// }

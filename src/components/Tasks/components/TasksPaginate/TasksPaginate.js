@@ -12,8 +12,10 @@ const TaskPageImgWrapper = styled.div`
     padding: 5px;
 `;
 const Dots = styled.li`
+    padding: 0 2px 0 2px;
     padding-top: 10px;
     list-style: none;
+    font-size: 24px;
 `;
 
 const TasksPaginate = ({pagesAmount, minPageNumberLimit, maxPageNumberLimit, handlePrevPageBtn, handleNextPageBtn, children}) => {

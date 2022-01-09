@@ -59,13 +59,11 @@ const TasksItem = ({tasks, name}) => {
 
     const handleNextPageBtn = useCallback(() => {
         if (currentPage === pagesAmount) {
-            console.log('MAX, MIN', maxPageNumberLimit, minPageNumberLimit);
             setCurrentPage(1);
             setMaxPageNumberLimit(3);
             setMinPageNumberLimit(1);
         }
         else {
-            console.log('MAX, MIN', maxPageNumberLimit, minPageNumberLimit);
             setCurrentPage(currentPage + 1);
             if (currentPage + 1 > maxPageNumberLimit) {
                 setMaxPageNumberLimit(maxPageNumberLimit + maxPageNumberShown);
