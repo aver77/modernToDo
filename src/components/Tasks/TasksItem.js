@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
@@ -29,40 +30,49 @@ const TasksItem = ({tasks, name}) => {
     //for displaying 4 tasks on every single page:
     const [currentPage, setCurrentPage] = useState(1);
     const [tasksPerPage] = useState(4);
-
+    
     const indexOfLastTask = useMemo(() => currentPage * tasksPerPage, [currentPage, tasksPerPage]);
     const indexOfFirstTask = useMemo(() => indexOfLastTask - tasksPerPage, [tasksPerPage, indexOfLastTask]);
     const currentTasks = useMemo(() => tasks?tasks.slice(indexOfFirstTask, indexOfLastTask) : [], [indexOfFirstTask, indexOfLastTask, tasks]);
 
     //working with dots instead of all btns:
     const pagesAmount = Math.ceil(tasks?(tasks.length / tasksPerPage) : null);
-    const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(4);
+    const [maxPageNumberShown] = useState(3);
+    const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(3);
     const [minPageNumberLimit, setMinPageNumberLimit] = useState(1);
 
     //working with btns methods
     const handlePrevPageBtn = useCallback(() => {
-        if (currentPage === 1) setCurrentPage(pagesAmount);
-        else setCurrentPage(currentPage - 1);
-
-        console.log('MIN: MAX и MIN до изменения', maxPageNumberLimit,minPageNumberLimit)
-        if ((currentPage - 1) % tasksPerPage === 0) {
-            setMaxPageNumberLimit(maxPageNumberLimit - tasksPerPage);
-            setMinPageNumberLimit(minPageNumberLimit - tasksPerPage);
-            console.log('MIN: MAX и MIN после изменения', minPageNumberLimit, minPageNumberLimit)
+        if (currentPage === 1) {
+            setCurrentPage(pagesAmount);
+            setMaxPageNumberLimit(pagesAmount);
+            setMinPageNumberLimit(pagesAmount - maxPageNumberShown + 1);
         }
-    },[currentPage, maxPageNumberLimit, minPageNumberLimit, pagesAmount, tasksPerPage]);
+        else {
+            setCurrentPage(currentPage - 1);
+            if (currentPage - 1 < minPageNumberLimit) {
+                setMaxPageNumberLimit(maxPageNumberLimit - maxPageNumberShown);
+                setMinPageNumberLimit(minPageNumberLimit - maxPageNumberShown);
+            }
+        }
+    },[currentPage, maxPageNumberLimit, minPageNumberLimit]);
 
     const handleNextPageBtn = useCallback(() => {
-        if (currentPage === pagesAmount) setCurrentPage(1);
-        else setCurrentPage(currentPage + 1);
-
-        console.log('MAX: MAX и MIN до изменения', maxPageNumberLimit,minPageNumberLimit)
-        if (currentPage + 1 > maxPageNumberLimit) {
-            setMaxPageNumberLimit(maxPageNumberLimit + tasksPerPage);
-            setMinPageNumberLimit(minPageNumberLimit + tasksPerPage);
-            console.log('MAX: MAX и MIN после изменения', maxPageNumberLimit, minPageNumberLimit);
+        if (currentPage === pagesAmount) {
+            console.log('MAX, MIN', maxPageNumberLimit, minPageNumberLimit);
+            setCurrentPage(1);
+            setMaxPageNumberLimit(3);
+            setMinPageNumberLimit(1);
         }
-    },[currentPage, maxPageNumberLimit, minPageNumberLimit, pagesAmount, tasksPerPage]);
+        else {
+            console.log('MAX, MIN', maxPageNumberLimit, minPageNumberLimit);
+            setCurrentPage(currentPage + 1);
+            if (currentPage + 1 > maxPageNumberLimit) {
+                setMaxPageNumberLimit(maxPageNumberLimit + maxPageNumberShown);
+                setMinPageNumberLimit(minPageNumberLimit + maxPageNumberShown);
+            }
+        }
+    },[currentPage, maxPageNumberLimit, minPageNumberLimit]);
 
     const handleBtnPageClick = useCallback((e) => {
         setCurrentPage(+e.currentTarget.id);
@@ -76,7 +86,6 @@ const TasksItem = ({tasks, name}) => {
 
     if (!tasks.length && name === "allTasks") return <DefaultView/>
     if (!tasks.length) return <></>
-
     return (
         <>
             <TasksViewPaginate name={name} currentTasks={currentTasks}/>
@@ -91,6 +100,5 @@ const TasksItem = ({tasks, name}) => {
         </>
     );
 };
-
 
 export default React.memo(TasksItem);
