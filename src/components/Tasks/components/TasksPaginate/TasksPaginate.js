@@ -11,16 +11,31 @@ const TaskPageImgWrapper = styled.div`
     align-items: center;
     padding: 5px;
 `;
+const Dots = styled.li`
+    padding-top: 10px;
+    list-style: none;
+`;
 
-const TasksPaginate = ({pagesAmount, prevHandler, nextHandler, children}) => {
+const TasksPaginate = ({pagesAmount, minPageNumberLimit, maxPageNumberLimit, handlePrevPageBtn, handleNextPageBtn, children}) => {
+
+    //dots
+    let pageDecrementBtn = null;
+    if (minPageNumberLimit > 1) {
+        pageDecrementBtn = <Dots onClick={handlePrevPageBtn}>•••</Dots>
+    }
+    let pageIncrementBtn = null;
+    if (pagesAmount > maxPageNumberLimit) {
+        pageIncrementBtn = <Dots onClick={handleNextPageBtn}>•••</Dots>
+    }
 
     if (pagesAmount >= 2) {
         return (
             <TaskPageImgWrapper>
-                <TaskImgPaginate imgLink={prevPic} imgAlt="prev" pageHandler={prevHandler}/> 
-                    {/* компонент pagination с пропсами */}
+                <TaskImgPaginate imgLink={prevPic} imgAlt="prev" pageHandler={handlePrevPageBtn}/> 
+                    {pageDecrementBtn}
                     {children}
-                <TaskImgPaginate imgLink={nextPic} imgAlt="next" pageHandler={nextHandler}/>
+                    {pageIncrementBtn}
+                <TaskImgPaginate imgLink={nextPic} imgAlt="next" pageHandler={handleNextPageBtn}/>
             </TaskPageImgWrapper>
         );
     }

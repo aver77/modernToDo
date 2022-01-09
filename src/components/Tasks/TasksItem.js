@@ -24,58 +24,66 @@ const TaskWithPaginateWrap = styled.div`
     }
 `
 
-const TasksItem = ({tasks, name }) => {
+const TasksItem = ({tasks, name}) => {
     const taskFoundedIndex = useSelector(state => state.tasksSlice.pageNumber);
-
+    //for displaying 4 tasks on every single page:
     const [currentPage, setCurrentPage] = useState(1);
     const [tasksPerPage] = useState(4);
-    const pagesAmount = Math.ceil(tasks?(tasks.length / tasksPerPage):null);
 
-    const lastTaskIndex  = currentPage * tasksPerPage;
-    const firstTaskIndex = lastTaskIndex - tasksPerPage;
-    const currentTask = useMemo(() => {
-        return tasks?(tasks.slice(firstTaskIndex, lastTaskIndex)) : [];
-    },[firstTaskIndex, lastTaskIndex, tasks]);
+    const indexOfLastTask = useMemo(() => currentPage * tasksPerPage, [currentPage, tasksPerPage]);
+    const indexOfFirstTask = useMemo(() => indexOfLastTask - tasksPerPage, [tasksPerPage, indexOfLastTask]);
+    const currentTasks = useMemo(() => tasks?tasks.slice(indexOfFirstTask, indexOfLastTask) : [], [indexOfFirstTask, indexOfLastTask, tasks]);
 
-    //автоматически при поиске эл-та установит страницу => paginateHandler - чтоб при поиске элемента получали в него номер страницы НЕ НУЖЕН!
+    //working with dots instead of all btns:
+    const pagesAmount = Math.ceil(tasks?(tasks.length / tasksPerPage) : null);
+    const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(4);
+    const [minPageNumberLimit, setMinPageNumberLimit] = useState(1);
+
+    //working with btns methods
+    const handlePrevPageBtn = useCallback(() => {
+        if (currentPage === 1) setCurrentPage(pagesAmount);
+        else setCurrentPage(currentPage - 1);
+
+        console.log('MIN: MAX и MIN до изменения', maxPageNumberLimit,minPageNumberLimit)
+        if ((currentPage - 1) % tasksPerPage === 0) {
+            setMaxPageNumberLimit(maxPageNumberLimit - tasksPerPage);
+            setMinPageNumberLimit(minPageNumberLimit - tasksPerPage);
+            console.log('MIN: MAX и MIN после изменения', minPageNumberLimit, minPageNumberLimit)
+        }
+    },[currentPage, maxPageNumberLimit, minPageNumberLimit, pagesAmount, tasksPerPage]);
+
+    const handleNextPageBtn = useCallback(() => {
+        if (currentPage === pagesAmount) setCurrentPage(1);
+        else setCurrentPage(currentPage + 1);
+
+        console.log('MAX: MAX и MIN до изменения', maxPageNumberLimit,minPageNumberLimit)
+        if (currentPage + 1 > maxPageNumberLimit) {
+            setMaxPageNumberLimit(maxPageNumberLimit + tasksPerPage);
+            setMinPageNumberLimit(minPageNumberLimit + tasksPerPage);
+            console.log('MAX: MAX и MIN после изменения', maxPageNumberLimit, minPageNumberLimit);
+        }
+    },[currentPage, maxPageNumberLimit, minPageNumberLimit, pagesAmount, tasksPerPage]);
+
+    const handleBtnPageClick = useCallback((e) => {
+        setCurrentPage(+e.currentTarget.id);
+    },[])
+
     useEffect(() => {
         if (taskFoundedIndex) {
             setCurrentPage(Math.ceil(taskFoundedIndex / tasksPerPage));
         }
     },[taskFoundedIndex, tasksPerPage]);
 
-    const paginate = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    }
-
-    const nextPage = useCallback(() => {
-        setCurrentPage((page) => {
-            if (page === tasks.length)
-                return 1;
-            return page + 1;
-        })
-    },[tasks.length, setCurrentPage]);
-
-    const prevPage = useCallback(() => {
-        setCurrentPage((page) => {
-            if (page === 1)
-                return 1;
-            return tasks.length;
-        })
-    },[tasks.length, setCurrentPage]);
-
     if (!tasks.length && name === "allTasks") return <DefaultView/>
-    
     if (!tasks.length) return <></>
-    // тут возвращаем уже динамическое
+
     return (
-        //передаем не все таски а currentTask
         <>
-            <TasksViewPaginate name={name} currentTask={currentTask}/>
+            <TasksViewPaginate name={name} currentTasks={currentTasks}/>
         
             <TaskWithPaginateWrap>
-                <TasksPaginate pagesAmount={pagesAmount} tasks={tasks} prevHandler={prevPage} nextHandler={nextPage}>
-                    <Pagination currentIndex={currentPage} tasksPerPage={tasksPerPage} totalTasks={tasks.length} paginate={paginate}/>
+                <TasksPaginate pagesAmount={pagesAmount} tasks={tasks} minPageNumberLimit={minPageNumberLimit} maxPageNumberLimit={maxPageNumberLimit} handlePrevPageBtn={handlePrevPageBtn} handleNextPageBtn={handleNextPageBtn}>
+                    <Pagination pagesAmount={pagesAmount} currentPage={currentPage} maxPageNumberLimit={maxPageNumberLimit} minPageNumberLimit={minPageNumberLimit} handleBtnPageClick={handleBtnPageClick}/>
                 </TasksPaginate>
 
                 <TasksClear name={name}/>

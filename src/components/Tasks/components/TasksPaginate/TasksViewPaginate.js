@@ -22,11 +22,11 @@ const TaskWrapper = styled.div`
     margin-top: 10px;
 `;
 
-const TasksViewPaginate = ({name, currentTask}) => {
+const TasksViewPaginate = ({name, currentTasks}) => {
     return (
         <TasksWrapper>  
             {        
-                currentTask.map((item, index) => {
+                currentTasks.map((item, index) => {
                     return (
                         <TaskWrapper key={index}>
                             <TaskView task={item} number={index} name={name}/>

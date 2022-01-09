@@ -8,109 +8,45 @@ const PaginationUl = styled.ul`
     justify-content: center;
     align-items: center;
 `;
-const PaginationLi = styled.li`
-`;
-const PaginationLiItem = styled.a`
+const PaginationLiItem = styled.li`
     &:focus,&:hover,&:active {
         opacity: 0.6;
     }
 `;
+
 const PaginationLiText= styled.span`
     font-size: 20px;
     padding: 0 2px 0 2px;
+    color: ${props => props.textColor || 'black'};
 `;
 
-//компонент с кнопками (ссылками)
-const Pagination = ({currentIndex, tasksPerPage, totalTasks, paginate}) => {
-    const totalPagesAmount =  Math.ceil(totalTasks / tasksPerPage);
-    //вывод кнопочек (исправить как 1,2,3...n)
-    const pageOfAllNumbers = [] //1,2,...кол-во страниц
-    for (let i=1; i<=totalPagesAmount; i++) { //1,2,3,4,5,6,7,8
-        pageOfAllNumbers.push(i);
-    }
-
-    const ViewLiItem = ({number = null}) => {
-        return (
-            <PaginationLiItem 
-                href="#0"
-                onClick={() => number?paginate(number): null}
-            >
-                <PaginationLiText>{number?number:'...'}</PaginationLiText>
-            </PaginationLiItem>
-        );
+const Pagination = ({pagesAmount, currentPage, maxPageNumberLimit, minPageNumberLimit, handleBtnPageClick}) => {
+    //btns
+    const pageNumbersBtns = [];
+    for (let i = 1; i <= pagesAmount; i++) {
+        pageNumbersBtns.push(i);
     }
 
     return (
         <PaginationWrapper>
             <PaginationUl>
                 {
-                    (pageOfAllNumbers.length <=3) ?
-                        pageOfAllNumbers.map(number => {
-                            return (
-                                <PaginationLi key={number}>
-                                    <ViewLiItem number={number}/>
-                                </PaginationLi>
-                            );
-                        })
-                    :
-                    pageOfAllNumbers.map((number,index) => {
-                        if (currentIndex <= 3) {
-                            return (
-                                index < 3?
-                                <PaginationLi key={number}>
-                                    <ViewLiItem number={number}/>
-                                </PaginationLi>
-                                :
-                                index === 3?
-                                <PaginationLi key={number}>
-                                    <ViewLiItem/>
-                                    <ViewLiItem number={totalPagesAmount}/>
-                                </PaginationLi>
-                                :
-                                null
-                            );
-                        }   
-                        else if (currentIndex > 3 && totalPagesAmount >=7 && currentIndex<= totalPagesAmount - 3) {
-                            return (
-                                index === 0?
-                                <PaginationLi key={number}>
-                                    <ViewLiItem number={number}/>
-                                    <ViewLiItem/>
-                                </PaginationLi>
-                                :
-                                (index >= currentIndex && index < currentIndex + 3)?
-                                    <PaginationLi key={number}>
-                                        <ViewLiItem number={number}/>
-                                    </PaginationLi>
-                                :
-                                (index === currentIndex + 3)?
-                                    <PaginationLi key={number}>
-                                        <ViewLiItem/>
-                                        <ViewLiItem number={totalPagesAmount}/>
-                                    </PaginationLi>
-                                :
-                                null
-                            );
+                    pageNumbersBtns.map((numberBtn) => {
+                        if (numberBtn < maxPageNumberLimit + 1 && numberBtn >= minPageNumberLimit) {
+                        return (
+                            <PaginationLiItem
+                                key={numberBtn}
+                                id={numberBtn}
+                                onClick={handleBtnPageClick}
+                            >
+                                <PaginationLiText textColor={currentPage === numberBtn?'red':null}>{numberBtn}</PaginationLiText>
+                            </PaginationLiItem>
+                            )
                         }
-                        else if (currentIndex > 3 && currentIndex >= totalPagesAmount - 3) {
-                            return (
-                                index === 0?
-                                    <PaginationLi key={number}>
-                                        <ViewLiItem number={number}/>
-                                        <ViewLiItem/>
-                                    </PaginationLi>
-                                :
-                                (index >= totalPagesAmount - 2)? 
-                                    <PaginationLi key={number}>
-                                        <ViewLiItem number={number}/>
-                                    </PaginationLi>
-                                :
-                                null
-                            );
-                        }
-
-                        return <></>;
-                    })
+                        else return null;
+                    }   
+                        
+                    )
                 }
             </PaginationUl>
         </PaginationWrapper>
@@ -118,3 +54,13 @@ const Pagination = ({currentIndex, tasksPerPage, totalTasks, paginate}) => {
 };
 
 export default Pagination;
+
+//     const ViewLiItem = ({number = null}) => {
+//     return (
+//         <PaginationLiItem 
+//             onClick={() => number?handleBtnPageClick(number): null}
+//         >
+//             <PaginationLiText>{number?number: <>&hellip;</>}</PaginationLiText>
+//         </PaginationLiItem>
+//     );
+// }
