@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback} from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { removeAllTasks } from '../../../../redux/tasksSlice';
@@ -22,13 +22,17 @@ const MainInputRemoveElem = styled.img`
     }
 `;
 
-const MainInputRemove = ({clearForm}) => {
+const MainInputRemove = ({clearForm, openModalDeleteHandler, openWarnDialogHandler, isDelete}) => {
     const dispatch = useDispatch();
 
     const removeTasks = useCallback(() => {
         clearForm();
-        dispatch(removeAllTasks());
-    },[dispatch, clearForm])
+        openWarnDialogHandler(true);
+        if (isDelete) {
+            dispatch(removeAllTasks());
+            openModalDeleteHandler(true);
+        }
+    },[clearForm, openWarnDialogHandler, isDelete, dispatch, openModalDeleteHandler])
 
     return (
         <MainInputRemoveElem

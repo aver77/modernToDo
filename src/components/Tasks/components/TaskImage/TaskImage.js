@@ -56,7 +56,9 @@ const TaskImage = ({imgLink, imgAlt, imgTitle, id, solved, liked, name}) => {
                 }
                 if (imgAlt === "delete") {
                     if (name === "deleted") dispatch(removeRemovedTask(id));
-                    else dispatch(removeTask(id));
+                    else {
+                        dispatch(removeTask(id));
+                    }
                 }
             }}                 
         />

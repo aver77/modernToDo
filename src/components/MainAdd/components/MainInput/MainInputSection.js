@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState , useRef, useCallback, useMemo} from 'react';
+import React, {useState , useRef, useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -28,7 +28,7 @@ const MainInputWrapper = styled.div`
     width: 100%;
 `;
 
-const MainInputSection = () => {  
+const MainInputSection = ({openModalAddHandler, openModalDeleteHandler, openWarnDialogHandler, isDelete}) => {  
 
     const [newTask, setNewTask] = useState(null);
     const dispatch = useDispatch();
@@ -61,15 +61,21 @@ const MainInputSection = () => {
 
     const inputAddRefHandler = useCallback(() => {
         addDataHandler(inputRefHandler());
+        openModalAddHandler(true);
         clearForm();
-    },[newTask])  
+    },[newTask])
 
     return (
         <MainInputSectionElem>
             <MainInputWrapper>
                 <MainInput inputAddRefHandler={inputAddRefHandler} inputAddRef={inputAddRef}/>
                 <MainInputAdd inputAddRefHandler={inputAddRefHandler} inputAddRef={inputAddRef}/>
-                <MainInputRemove clearForm={clearForm}/>
+                <MainInputRemove 
+                    clearForm={clearForm} 
+                    openModalDeleteHandler={openModalDeleteHandler} 
+                    openWarnDialogHandler={openWarnDialogHandler}
+                    isDelete={isDelete}
+                />
             </MainInputWrapper>
         </MainInputSectionElem>
     );

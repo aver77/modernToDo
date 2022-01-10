@@ -29,7 +29,11 @@ const TasksViewPaginate = ({name, currentTasks}) => {
                 currentTasks.map((item, index) => {
                     return (
                         <TaskWrapper key={index}>
-                            <TaskView task={item} number={index} name={name}/>
+                            <TaskView 
+                                task={item} 
+                                number={index} 
+                                name={name} 
+                            />
                         </TaskWrapper>
                     );
                 })
@@ -37,5 +41,4 @@ const TasksViewPaginate = ({name, currentTasks}) => {
         </TasksWrapper>   
     )
 };
-
 export default React.memo(TasksViewPaginate);

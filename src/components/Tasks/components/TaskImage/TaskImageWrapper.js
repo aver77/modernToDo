@@ -10,14 +10,17 @@ import likedImg from '../../../../images/liked.png';
 import solvedImg from '../../../../images/solved.png';
 
 const TaskImgWrapper = styled.div`
+    min-width: 200px;
     padding: 22px 32px 22px 6px;
     @media screen and (max-width: 576px) {
         & {
+            min-width: 100px;
             padding: 22px 22px 22px 6px;
         }
     }
     @media screen and (max-width: 417px) {
         & {
+            min-width: 80px;
             padding: 22px 12px 22px 4px;
         }
     }
@@ -26,9 +29,29 @@ const TaskImgWrapper = styled.div`
 const TaskImageWrapper = ({liked, solved, id, name}) => {
     return (
         <TaskImgWrapper>
-            <TaskImage imgLink={liked?likedImg:likeImg} imgAlt='like' title='Like task' liked={liked} id={id} name={name}/>
-            <TaskImage imgLink={solved?solvedImg:solveImg} imgAlt='solve' title='Solve task' solved={solved} id={id} name={name}/>
-            <TaskImage imgLink={deleteImg} imgAlt='delete' title='Delete task' id={id} name={name}/>
+            <TaskImage 
+                imgLink={liked?likedImg:likeImg} 
+                imgAlt='like' 
+                title='Like task' 
+                liked={liked} 
+                id={id} 
+                name={name}
+            />
+            <TaskImage 
+                imgLink={solved?solvedImg:solveImg} 
+                imgAlt='solve' 
+                title='Solve task' 
+                solved={solved} 
+                id={id} 
+                name={name}
+            />
+            <TaskImage 
+                imgLink={deleteImg} 
+                imgAlt='delete' 
+                title='Delete task' 
+                id={id} 
+                name={name}
+            />
         </TaskImgWrapper>
     );
 };

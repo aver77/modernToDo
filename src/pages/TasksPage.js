@@ -19,4 +19,4 @@ const TasksPage = () => {
     );
 };
 
-export default TasksPage;
+export default React.memo(TasksPage);

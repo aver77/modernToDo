@@ -18,12 +18,13 @@ const MainInputAddElem = styled.img`
 `;
 
 const MainInputAdd = ({inputAddRefHandler}) => {
+
     return (
         <MainInputAddElem 
             title="Add task" 
             src={add} 
             alt="add"
-            onClick = { inputAddRefHandler }
+            onClick = {inputAddRefHandler}
         />
     );
 };

@@ -28,6 +28,7 @@ const TaskNumber = styled.p`
 const TaskText = styled.p`
     font-size: 20px;
     padding-top: 22px;
+    overflow: hidden;
     @media screen and (max-width: 576px) {
         & {
             padding-top: 24px;
@@ -46,7 +47,6 @@ const TaskText = styled.p`
         }
     }
 `;
-
 
 const TaskView = ({task, number, name}) => {
     const {liked, solved, id, taskText} = task;

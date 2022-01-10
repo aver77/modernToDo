@@ -27,6 +27,7 @@ const TaskWithPaginateWrap = styled.div`
 
 const TasksItem = ({tasks, name}) => {
     const taskFoundedIndex = useSelector(state => state.tasksSlice.pageNumber);
+
     //for displaying 4 tasks on every single page:
     const [currentPage, setCurrentPage] = useState(1);
     const [tasksPerPage] = useState(4);
