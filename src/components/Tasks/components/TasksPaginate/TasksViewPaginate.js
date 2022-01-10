@@ -22,7 +22,11 @@ const TaskWrapper = styled.div`
     margin-top: 10px;
 `;
 
-const TasksViewPaginate = ({name, currentTasks}) => {
+const TasksViewPaginate = ({name, currentTasks, handlePrevPageBtn}) => {
+    
+    if (!currentTasks.length) {
+        handlePrevPageBtn();
+    }
     return (
         <TasksWrapper>  
             {        

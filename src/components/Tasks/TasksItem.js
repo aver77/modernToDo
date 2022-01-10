@@ -87,7 +87,7 @@ const TasksItem = ({tasks, name}) => {
     if (!tasks.length) return <></>
     return (
         <>
-            <TasksViewPaginate name={name} currentTasks={currentTasks}/>
+            <TasksViewPaginate name={name} currentTasks={currentTasks} handlePrevPageBtn={handlePrevPageBtn}/>
         
             <TaskWithPaginateWrap>
                 <TasksPaginate pagesAmount={pagesAmount} tasks={tasks} minPageNumberLimit={minPageNumberLimit} maxPageNumberLimit={maxPageNumberLimit} handlePrevPageBtn={handlePrevPageBtn} handleNextPageBtn={handleNextPageBtn}>
