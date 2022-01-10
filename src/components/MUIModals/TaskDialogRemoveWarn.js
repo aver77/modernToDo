@@ -5,24 +5,29 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import { useDispatch } from 'react-redux';
+import { removeAllTasks } from '../../redux/tasksSlice';
+
 const DialogWrap = styled.div`
     position: absolute;
     z-index: 9999;
 `;
 
-const TaskDialog = ({openDialogHandler, isDelete}) => {
+const TaskDialogRemoveWarn = ({openDialogHandler, openModalHandler = null}) => {
+    const dispatch = useDispatch();
+
     const [open, setOpen] = React.useState(true);
 
     const handleClose = () => {
         setOpen(false);
         openDialogHandler(false);
-        isDelete(false);
     };
 
     const handleCloseRemove = () => {
         setOpen(false);
-        isDelete(true);
         openDialogHandler(false);
+        if (openModalHandler) openModalHandler(true);
+        dispatch(removeAllTasks());
     }
 
     return (
@@ -47,4 +52,4 @@ const TaskDialog = ({openDialogHandler, isDelete}) => {
         </DialogWrap>
     );
 }
-export default React.memo(TaskDialog);
+export default React.memo(TaskDialogRemoveWarn);

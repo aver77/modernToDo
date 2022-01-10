@@ -28,7 +28,7 @@ const MainInputWrapper = styled.div`
     width: 100%;
 `;
 
-const MainInputSection = ({openModalAddHandler, openModalDeleteHandler, openWarnDialogHandler, isDelete}) => {  
+const MainInputSection = ({openWarnDialogHandler, isDelete}) => {  
 
     const [newTask, setNewTask] = useState(null);
     const dispatch = useDispatch();
@@ -61,7 +61,6 @@ const MainInputSection = ({openModalAddHandler, openModalDeleteHandler, openWarn
 
     const inputAddRefHandler = useCallback(() => {
         addDataHandler(inputRefHandler());
-        openModalAddHandler(true);
         clearForm();
     },[newTask])
 
@@ -72,9 +71,6 @@ const MainInputSection = ({openModalAddHandler, openModalDeleteHandler, openWarn
                 <MainInputAdd inputAddRefHandler={inputAddRefHandler} inputAddRef={inputAddRef}/>
                 <MainInputRemove 
                     clearForm={clearForm} 
-                    openModalDeleteHandler={openModalDeleteHandler} 
-                    openWarnDialogHandler={openWarnDialogHandler}
-                    isDelete={isDelete}
                 />
             </MainInputWrapper>
         </MainInputSectionElem>

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import add from '../../../../images/add.png';
+
+import TaskModal from '../../../MUIModals/TaskModal';
 
 const MainInputAddElem = styled.img`
     width: 38px;
@@ -17,16 +19,30 @@ const MainInputAddElem = styled.img`
     }
 `;
 
-const MainInputAdd = ({inputAddRefHandler}) => {
+const MainInputAdd = ({inputAddRefHandler, inputAddRef}) => {
+    const [openModalAdd, setOpenModalAdd] = useState(false);
+
+    const openModalAddHandler = (value) => {
+        setOpenModalAdd(value);
+    }
+    const clickHandler = () => {
+        if (inputAddRef.current.value) {
+            openModalAddHandler(true);
+        }
+        inputAddRefHandler();
+    }
 
     return (
-        <MainInputAddElem 
-            title="Add task" 
-            src={add} 
-            alt="add"
-            onClick = {inputAddRefHandler}
-        />
+        <>
+            <MainInputAddElem 
+                title="Add task" 
+                src={add} 
+                alt="add"
+                onClick = {clickHandler}
+            />
+            {openModalAdd && <TaskModal openModalHandler={openModalAddHandler} text="Task added" severity="success" color="#4BAE4F"/>}
+        </>
     );
 };
 
-export default MainInputAdd;
+export default React.memo(MainInputAdd);

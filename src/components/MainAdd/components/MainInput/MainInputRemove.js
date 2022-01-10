@@ -1,8 +1,9 @@
-import React, { useCallback} from 'react';
+import React, {useState, useCallback} from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { removeAllTasks } from '../../../../redux/tasksSlice';
+import { useSelector } from 'react-redux';
 
+import TaskModal from '../../../MUIModals/TaskModal';
+import TaskDialogRemoveWarn from '../../../MUIModals/TaskDialogRemoveWarn';
 import remove from '../../../../images/removeAll.png';
 
 const MainInputRemoveElem = styled.img`
@@ -22,26 +23,39 @@ const MainInputRemoveElem = styled.img`
     }
 `;
 
-const MainInputRemove = ({clearForm, openModalDeleteHandler, openWarnDialogHandler, isDelete}) => {
-    const dispatch = useDispatch();
+const MainInputRemove = ({clearForm}) => {
+    const allTasks = useSelector(state => state.tasksSlice.allTasks);
 
-    const removeTasks = useCallback(() => {
+    const [openModalDelete, setOpenModalDelete] = useState(false);
+    const [openDialogWarn, setOpenDialogWarn] = useState(false);
+    
+    const openModalDeleteHandler = useCallback((value) => {
+        setOpenModalDelete(value);
+    },[]);
+
+    const removeTasks = () => {
         clearForm();
-        openWarnDialogHandler(true);
-        if (isDelete) {
-            dispatch(removeAllTasks());
-            openModalDeleteHandler(true);
+        if (allTasks && allTasks.length) {
+            openWarnDialogHandler(true);
         }
-    },[clearForm, openWarnDialogHandler, isDelete, dispatch, openModalDeleteHandler])
+    };
+
+    const openWarnDialogHandler = useCallback((value) => {
+        setOpenDialogWarn(value);
+    },[]);
 
     return (
-        <MainInputRemoveElem
-            title="Remove all tasks"
-            src={remove}
-            alt="remove all"
-            onClick = { removeTasks }
-        />
+        <>
+            <MainInputRemoveElem
+                title="Remove all tasks"
+                src={remove}
+                alt="remove all"
+                onClick = { removeTasks }
+            />
+            {openDialogWarn && <TaskDialogRemoveWarn openDialogHandler={openWarnDialogHandler} openModalHandler={openModalDeleteHandler}/>}
+            {openModalDelete && <TaskModal openModalHandler={openModalDeleteHandler} text="All tasks deleted" severity="success" color="#F44437"/>}
+        </>
     );
 };
 
-export default MainInputRemove;
+export default React.memo(MainInputRemove);
