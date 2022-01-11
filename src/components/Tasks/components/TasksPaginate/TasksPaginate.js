@@ -19,6 +19,7 @@ const Dots = styled.li`
 `;
 
 const TasksPaginate = ({pagesAmount, minPageNumberLimit, maxPageNumberLimit, handlePrevPageBtn, handleNextPageBtn, children}) => {
+
     //dots
     let pageDecrementBtn = null;
     if (minPageNumberLimit > 1) {

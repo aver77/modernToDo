@@ -35,7 +35,7 @@ const TasksViewPaginate = ({name, currentTasks, handlePrevPageBtn}) => {
         if (!currentTasks.length) {
             handlePrevPageBtn();
         }
-    })
+    }, [currentTasks.length, handlePrevPageBtn]);
     
     return (
         <TasksWrapper>  

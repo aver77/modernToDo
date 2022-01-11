@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
@@ -19,15 +18,16 @@ const TaskWithPaginateWrap = styled.div`
     align-items: center;
     @media screen and (max-width: 428px) {
         margin: 10px 0 160px 0;
+        justify-content: center;
     }
     @media screen and (max-height: 428px) {
         margin: 10px 0 90px 0;
+        justify-content: center;
     }
 `
 
 const TasksItem = ({tasks, name}) => {
     const taskFoundedIndex = useSelector(state => state.tasksSlice.pageNumber);
-
     //for displaying 4 tasks on every single page:
     const [currentPage, setCurrentPage] = useState(1);
     const [tasksPerPage] = useState(4);
@@ -37,17 +37,30 @@ const TasksItem = ({tasks, name}) => {
     const currentTasks = useMemo(() => tasks?tasks.slice(indexOfFirstTask, indexOfLastTask) : [], [indexOfFirstTask, indexOfLastTask, tasks]);
 
     //working with dots instead of all btns:
-    const pagesAmount = Math.ceil(tasks?(tasks.length / tasksPerPage) : null);
+    const pagesAmount = useMemo(() => Math.ceil(tasks?(tasks.length / tasksPerPage) : null), [tasks, tasksPerPage]);
     const [maxPageNumberShown] = useState(3);
     const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(3);
     const [minPageNumberLimit, setMinPageNumberLimit] = useState(1);
 
+    useEffect(() => {
+        if (taskFoundedIndex !== null) {
+            setCurrentPage(Math.ceil(taskFoundedIndex / tasksPerPage));
+        }
+    },[taskFoundedIndex, tasksPerPage]);
+
     //working with btns methods
     const handlePrevPageBtn = useCallback(() => {
         if (currentPage === 1) {
-            setCurrentPage(pagesAmount);
-            setMaxPageNumberLimit(pagesAmount);
-            setMinPageNumberLimit(pagesAmount - maxPageNumberShown + 1);
+            if (tasks.length <= 8) {
+                setCurrentPage(2);
+                setMaxPageNumberLimit(2);
+                setMinPageNumberLimit(1);
+            }
+            else {
+                setCurrentPage(pagesAmount);
+                setMaxPageNumberLimit(pagesAmount);
+                setMinPageNumberLimit(pagesAmount - maxPageNumberShown + 1);
+            }
         }
         else {
             setCurrentPage(currentPage - 1);
@@ -56,7 +69,7 @@ const TasksItem = ({tasks, name}) => {
                 setMinPageNumberLimit(minPageNumberLimit - maxPageNumberShown);
             }
         }
-    },[currentPage, maxPageNumberLimit, minPageNumberLimit]);
+    },[currentPage, maxPageNumberLimit, maxPageNumberShown, minPageNumberLimit, pagesAmount, tasks.length]);
 
     const handleNextPageBtn = useCallback(() => {
         if (currentPage === pagesAmount) {
@@ -71,17 +84,11 @@ const TasksItem = ({tasks, name}) => {
                 setMinPageNumberLimit(minPageNumberLimit + maxPageNumberShown);
             }
         }
-    },[currentPage, maxPageNumberLimit, minPageNumberLimit]);
+    },[currentPage, maxPageNumberLimit, maxPageNumberShown, minPageNumberLimit, pagesAmount]);
 
     const handleBtnPageClick = useCallback((e) => {
         setCurrentPage(+e.currentTarget.id);
     },[])
-
-    useEffect(() => {
-        if (taskFoundedIndex !== null) {
-            setCurrentPage(Math.ceil(taskFoundedIndex / tasksPerPage));
-        }
-    },[taskFoundedIndex, tasksPerPage]);
 
     if (!tasks.length && name === "allTasks") return <DefaultView/>
     if (!tasks.length) return <></>
