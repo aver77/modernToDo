@@ -28,7 +28,7 @@ const MainInputWrapper = styled.div`
     width: 100%;
 `;
 
-const MainInputSection = ({openWarnDialogHandler, isDelete}) => {  
+const MainInputSection = () => {  
 
     const [newTask, setNewTask] = useState(null);
     const dispatch = useDispatch();
@@ -77,7 +77,7 @@ const MainInputSection = ({openWarnDialogHandler, isDelete}) => {
     );
 };
 
-export default MainInputSection;
+export default React.memo(MainInputSection);
 
 
 

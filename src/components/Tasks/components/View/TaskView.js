@@ -48,7 +48,7 @@ const TaskText = styled.p`
     }
 `;
 
-const TaskView = ({task, number, name}) => {
+const TaskView = ({task, number, name, openModalDeleteSingleHandler}) => {
     const {liked, solved, id, taskText} = task;
     return (
         <>
@@ -59,6 +59,7 @@ const TaskView = ({task, number, name}) => {
                 liked = {liked}
                 solved = {solved}
                 name = {name}
+                openModalDeleteSingleHandler = {openModalDeleteSingleHandler}
             />
         </>
     );

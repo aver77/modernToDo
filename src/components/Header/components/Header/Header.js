@@ -38,7 +38,6 @@ const HeaderMenu = styled.div`
 const Header = ({burgerHandler}) => {
     const {width} = useWindowDimensions();
     const [displayWidth, changeDisplayWidth] = useState({width}.width);
-    const [findTask, setFindTask] = useState(null);
 
     const dispatch = useDispatch();
     const allTasks = useSelector(state => state.tasksSlice.allTasks);
@@ -55,24 +54,25 @@ const Header = ({burgerHandler}) => {
         return result;
     }, [inputFindRef]);
 
-    const findDataHandler = useCallback(() => {
-        if (findTask) {
+    const findDataHandler = (data) => {
+        if (data) {
+            console.log('data text', data);
             allTasks.forEach(item => {
-                const itemText = item.taskText.slice(0, findTask.length);
-                if (itemText === findTask) {
+                const itemText = item.taskText.slice(0, data.length);
+                console.log('item text', itemText);
+                if (itemText === data) {
+                    console.log('равный')
                     // тогда нужно открыть страницу с таском (мб вернуть номер страницы в app и оттуда передать его в таскспейдж)
                     // поиск с открытием верной страницы
                     dispatch(findTaskAction(item.id));
-                    item.taskText.style.textDecoration = "underline";
-                    item.taskText.style.textDecorationColor = "yellow";
                 }
             })
         }
-    },[allTasks, dispatch, findTask]);
+    };
 
     const inputFindRefHandler = useCallback(() => {
-        setFindTask(inputRefHandler());
-        findDataHandler();
+        const data = inputRefHandler();
+        findDataHandler(data);
         inputFindRef.current.value = '';
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[inputFindRef]);
@@ -82,12 +82,7 @@ const Header = ({burgerHandler}) => {
             <HeaderMenu className="_container">
                 <HeaderTitle title="NW Project"/>
                 <HeaderInputSection inputFindRefHandler={inputFindRefHandler} inputFindRef={inputFindRef}/>
-                {
-                    displayWidth >= 1135?
-                        <HeaderNav/>
-                        :
-                        <HeaderBurgerItem burgerHandler={burgerHandler}/>
-                }
+                {displayWidth >= 1135?<HeaderNav/> : <HeaderBurgerItem burgerHandler={burgerHandler}/>}
             </HeaderMenu>
         </HeaderWrapper>
     );

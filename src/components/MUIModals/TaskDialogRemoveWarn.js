@@ -10,7 +10,7 @@ import { removeAllTasks } from '../../redux/tasksSlice';
 
 const DialogWrap = styled.div`
     position: absolute;
-    z-index: 9999;
+    z-index: 999;
 `;
 
 const TaskDialogRemoveWarn = ({openDialogHandler, openModalHandler = null}) => {

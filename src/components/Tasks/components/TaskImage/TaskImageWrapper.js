@@ -26,13 +26,13 @@ const TaskImgWrapper = styled.div`
     }
 `;
 
-const TaskImageWrapper = ({liked, solved, id, name}) => {
+const TaskImageWrapper = ({liked, solved, id, name, openModalDeleteSingleHandler}) => {
     return (
         <TaskImgWrapper>
             <TaskImage 
                 imgLink={liked?likedImg:likeImg} 
                 imgAlt='like' 
-                title='Like task' 
+                imgTitle='Like task' 
                 liked={liked} 
                 id={id} 
                 name={name}
@@ -40,7 +40,7 @@ const TaskImageWrapper = ({liked, solved, id, name}) => {
             <TaskImage 
                 imgLink={solved?solvedImg:solveImg} 
                 imgAlt='solve' 
-                title='Solve task' 
+                imgTitle='Solve task' 
                 solved={solved} 
                 id={id} 
                 name={name}
@@ -48,9 +48,10 @@ const TaskImageWrapper = ({liked, solved, id, name}) => {
             <TaskImage 
                 imgLink={deleteImg} 
                 imgAlt='delete' 
-                title='Delete task' 
+                imgTitle='Delete task' 
                 id={id} 
                 name={name}
+                openModalDeleteSingleHandler={openModalDeleteSingleHandler}
             />
         </TaskImgWrapper>
     );

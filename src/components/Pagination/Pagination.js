@@ -56,4 +56,4 @@ const Pagination = ({pagesAmount, currentPage, maxPageNumberLimit, minPageNumber
     );
 };
 
-export default Pagination;
+export default React.memo(Pagination);

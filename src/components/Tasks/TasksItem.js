@@ -78,7 +78,7 @@ const TasksItem = ({tasks, name}) => {
     },[])
 
     useEffect(() => {
-        if (taskFoundedIndex) {
+        if (taskFoundedIndex !== null) {
             setCurrentPage(Math.ceil(taskFoundedIndex / tasksPerPage));
         }
     },[taskFoundedIndex, tasksPerPage]);

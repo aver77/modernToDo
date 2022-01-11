@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import styled from 'styled-components';
 import add from '../../../../images/add.png';
 
@@ -22,9 +22,9 @@ const MainInputAddElem = styled.img`
 const MainInputAdd = ({inputAddRefHandler, inputAddRef}) => {
     const [openModalAdd, setOpenModalAdd] = useState(false);
 
-    const openModalAddHandler = (value) => {
+    const openModalAddHandler = useCallback((value) => {
         setOpenModalAdd(value);
-    }
+    },[])
     const clickHandler = () => {
         if (inputAddRef.current.value) {
             openModalAddHandler(true);

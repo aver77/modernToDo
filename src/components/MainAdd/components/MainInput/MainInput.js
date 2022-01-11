@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState, useCallback} from 'react';
 import styled from 'styled-components';
+
+import TaskModal from '../../../MUIModals/TaskModal';
 
 const MainInputElem = styled.input`
     margin: 0 32px 0 32px;
@@ -40,21 +42,31 @@ const MainInputElem = styled.input`
 
 const MainInput = ({inputAddRefHandler, inputAddRef}) => {
 
+    const [openModalAdd, setOpenModalAdd] = useState(false);
+
+    const openModalAddHandler = useCallback((value) => {
+        setOpenModalAdd(value);
+    },[])
+
     const keyPressAddHandler = (e) => {
         if (e.key === "Enter") {
             e.preventDefault();
+            openModalAddHandler(true);
             inputAddRefHandler();
         }
     }
 
     return (
-        <MainInputElem 
-            ref = {inputAddRef}
-            autoComplete="off" 
-            type="text" 
-            placeholder="Add a task..."
-            onKeyDown = { keyPressAddHandler }
-        />
+        <>
+            <MainInputElem 
+                ref = {inputAddRef}
+                autoComplete="off" 
+                type="text" 
+                placeholder="Add a task..."
+                onKeyDown = { keyPressAddHandler }
+            />
+            {openModalAdd && <TaskModal openModalHandler={openModalAddHandler} text="Task added" severity="success" color="#4BAE4F"/>}
+        </>
     );
 };
 

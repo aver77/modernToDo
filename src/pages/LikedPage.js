@@ -34,4 +34,4 @@ const LikedPage = () => {
     );
 };
 
-export default LikedPage;
+export default React.memo(LikedPage);

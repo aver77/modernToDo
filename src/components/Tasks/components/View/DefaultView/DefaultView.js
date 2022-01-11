@@ -60,14 +60,17 @@ const TaskText = styled.p`
     }
 `;
 const TaskImgWrapper = styled.div`
+    min-width: 200px;
     padding: 22px 32px 22px 6px;
     @media screen and (max-width: 576px) {
         & {
+            min-width: 100px;
             padding: 22px 22px 22px 6px;
         }
     }
     @media screen and (max-width: 417px) {
         & {
+            min-width: 80px;
             padding: 22px 12px 22px 4px;
         }
     }

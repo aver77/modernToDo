@@ -22,4 +22,4 @@ const DeletedPage = () => {
     );
 };
 
-export default DeletedPage;
+export default React.memo(DeletedPage);

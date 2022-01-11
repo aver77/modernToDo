@@ -21,4 +21,4 @@ const TaskImgPaginate = ({imgLink, imgAlt, pageHandler}) => {
     );
 };
 
-export default TaskImgPaginate;
+export default React.memo(TaskImgPaginate);

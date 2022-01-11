@@ -21,4 +21,4 @@ const BurgerUl = () => {
     );
 };
 
-export default BurgerUl;
+export default React.memo(BurgerUl);

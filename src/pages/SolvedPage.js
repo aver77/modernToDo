@@ -34,4 +34,4 @@ const SolvedPage = () => {
     );
 };
 
-export default SolvedPage;
+export default React.memo(SolvedPage);

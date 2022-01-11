@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import styled from 'styled-components';
 import TaskView from '../View/TaskView';
+
+import TaskModal from '../../../MUIModals/TaskModal';
 
 const TasksWrapper = styled.div`
     height: 100%;
@@ -23,10 +25,18 @@ const TaskWrapper = styled.div`
 `;
 
 const TasksViewPaginate = ({name, currentTasks, handlePrevPageBtn}) => {
+
+    const [openModalDeleteSingle, setOpenModalDeleteSingle] = useState(false);
+    const openModalDeleteSingleHandler = useCallback((value) => {
+        setOpenModalDeleteSingle(value);
+    },[]);
     
-    if (!currentTasks.length) {
-        handlePrevPageBtn();
-    }
+    useEffect(() => {
+        if (!currentTasks.length) {
+            handlePrevPageBtn();
+        }
+    })
+    
     return (
         <TasksWrapper>  
             {        
@@ -36,12 +46,14 @@ const TasksViewPaginate = ({name, currentTasks, handlePrevPageBtn}) => {
                             <TaskView 
                                 task={item} 
                                 number={index} 
-                                name={name} 
+                                name={name}
+                                openModalDeleteSingleHandler={openModalDeleteSingleHandler} 
                             />
                         </TaskWrapper>
                     );
                 })
             }
+            {openModalDeleteSingle && <TaskModal openModalHandler={openModalDeleteSingleHandler} text="Task deleted" severity="success" color="#F44437"/>}
         </TasksWrapper>   
     )
 };

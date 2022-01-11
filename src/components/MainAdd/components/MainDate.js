@@ -45,7 +45,6 @@ const MainItemCurrentDate = styled.span`
 `;
 
 const MainDate = () => {
-
     const [currentDate, setCurrentDate] = useState('');
     const nowDate = moment().format('LL') + '';
     const nowTime = moment().format('LT').split('');

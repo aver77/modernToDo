@@ -23,4 +23,4 @@ const HeaderNav = () => {
     );
 };
 
-export default HeaderNav;
+export default React.memo(HeaderNav);

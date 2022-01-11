@@ -8,7 +8,7 @@ const BurgerElement = styled.div`
     background:#EE6E73;
     top:0;
     right: 0;
-    z-index: 999;
+    z-index: 99999;
     height: 100vh;
     width: 50vw;
     box-shadow: 0px 0px 0px 9999px rgba(0, 0, 0, 0.4);
