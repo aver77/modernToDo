@@ -37,5 +37,4 @@ const HeaderLinkItem = ({linkPath, linkText}) => {
         </HeaderText>
     );
 };
-
 export default React.memo(HeaderLinkItem);

@@ -46,7 +46,12 @@ const tasksSlice = createSlice({
             state.pageNumber = null;
         },
         findTask(state, action) {
-            state.pageNumber = Math.ceil((action.payload + 1) / 4);
+            console.log(action.payload)
+            if (action.payload === 0 || action.payload % 4 === 0) {
+                state.pageNumber = Math.ceil((action.payload + 1) / 4);
+            } else {
+                state.pageNumber = Math.ceil((action.payload) / 4);
+            }
         },
         removeAllTasks(state) {
             state.removedTasks = state.allTasks;
@@ -73,7 +78,6 @@ const tasksSlice = createSlice({
             state.pageNumber = null;
         }
     }
-
 })
 
 export default tasksSlice.reducer;

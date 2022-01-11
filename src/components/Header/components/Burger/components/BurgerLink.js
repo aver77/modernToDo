@@ -53,5 +53,4 @@ const BurgerLink = ({path, text}) => {
         </BurgerText>
     );
 };
-
 export default React.memo(BurgerLink);

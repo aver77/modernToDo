@@ -44,5 +44,4 @@ const Burger = ({burgerHandler}) => {
         </BurgerElement>
     );
 };
-
 export default React.memo(Burger);

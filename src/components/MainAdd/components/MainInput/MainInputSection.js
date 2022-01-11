@@ -76,44 +76,4 @@ const MainInputSection = () => {
         </MainInputSectionElem>
     );
 };
-
 export default React.memo(MainInputSection);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// {/* <MainInput 
-//     ref = {inputAddRef}
-//     autoComplete="off" 
-//     type="text" 
-//     placeholder="Add a task..."
-//     onKeyDown = {
-//         keyPressAddHandler
-//     }
-// />
-// <MainInputAdd 
-//     title="Add task" 
-//     src={add} 
-//     alt="add"
-//     onClick = {() => {
-//         inputAddRefHandler(inputAddRef);
-//     }}
-// />
-// <MainInputRemove
-//     title="Remove all tasks"
-//     src={remove}
-//     alt="remove all"
-//     onClick = {() => {
-//         removeAllTasks();
-//     }}
-// /> */}

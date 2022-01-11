@@ -22,5 +22,4 @@ const HeaderNav = () => {
         </HeaderNavElem>
     );
 };
-
 export default React.memo(HeaderNav);

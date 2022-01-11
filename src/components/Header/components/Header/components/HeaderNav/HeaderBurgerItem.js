@@ -27,5 +27,4 @@ const HeaderBurgerItem = ({burgerHandler}) => {
         </BurgerWrapper>
     );
 };
-
 export default React.memo(HeaderBurgerItem);

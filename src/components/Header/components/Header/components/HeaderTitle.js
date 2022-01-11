@@ -19,5 +19,4 @@ const HeaderTitle = ({title}) => {
         </Link>
     );
 };
-
 export default React.memo(HeaderTitle);

@@ -35,5 +35,4 @@ const HeaderInputSection = ({inputFindRefHandler, inputFindRef}) => {
         </HeaderInputWrapper>
     );
 };
-
 export default React.memo(HeaderInputSection);

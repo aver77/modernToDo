@@ -23,5 +23,4 @@ const BurgerNav = () => {
         </BurgerNavElem>
     );
 };
-
 export default React.memo(BurgerNav);

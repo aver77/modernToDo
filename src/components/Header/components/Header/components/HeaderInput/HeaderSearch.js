@@ -23,5 +23,4 @@ const HeaderSearch = ({inputFindRefHandler}) => {
         />
     );
 };
-
 export default React.memo(HeaderSearch);

@@ -58,7 +58,6 @@ const Header = ({burgerHandler}) => {
         if (data) {
             console.log('data text', data);
             const index = allTasks.findIndex(item => item.taskText.slice(0, data.length) === data);
-            console.log(index);
             dispatch(findTaskAction(index));
         }     
     },[allTasks, dispatch]);
@@ -79,5 +78,4 @@ const Header = ({burgerHandler}) => {
         </HeaderWrapper>
     );
 };
-
 export default React.memo(Header);

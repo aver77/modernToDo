@@ -32,7 +32,6 @@ const MainInputAdd = ({inputAddRefHandler, inputAddRef}) => {
         }
         inputAddRefHandler();
     };
-
     return (
         <>
             <MainInputAddElem 
@@ -45,5 +44,4 @@ const MainInputAdd = ({inputAddRefHandler, inputAddRef}) => {
         </>
     );
 };
-
 export default React.memo(MainInputAdd);

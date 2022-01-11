@@ -52,5 +52,4 @@ const FooterItem = () => {
         </FooterWrapper>
     );
 };
-
 export default FooterItem;

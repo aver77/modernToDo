@@ -29,5 +29,4 @@ const BurgerImg = ({burgerHandler}) => {
         </BurgerImgWrapper>   
     );
 };
-
 export default React.memo(BurgerImg);

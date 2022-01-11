@@ -39,5 +39,4 @@ const HeaderInput = ({inputFindRefHandler, inputFindRef}) => {
         />
     );
 };
-
 export default React.memo(HeaderInput);

@@ -33,5 +33,4 @@ const LikedPage = () => {
         </TasksPageWrapper>
     );
 };
-
 export default React.memo(LikedPage);

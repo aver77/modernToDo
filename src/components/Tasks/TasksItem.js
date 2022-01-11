@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
+import TaskModal from '../MUIModals/TaskModal';
 import DefaultView from './components/View/DefaultView/DefaultView';
 
 import Pagination from '../Pagination/Pagination';
@@ -28,6 +29,11 @@ const TaskWithPaginateWrap = styled.div`
 
 const TasksItem = ({tasks, name}) => {
     const taskFoundedIndex = useSelector(state => state.tasksSlice.pageNumber);
+    //modal
+    const [showModalFounded, setShowModalFounded] = useState(false);
+    const showModalFoundedHandler = (value) => {
+        setShowModalFounded(value)
+    }
     //for displaying 4 tasks on every single page:
     const [currentPage, setCurrentPage] = useState(1);
     const [tasksPerPage] = useState(4);
@@ -41,14 +47,6 @@ const TasksItem = ({tasks, name}) => {
     const [maxPageNumberShown] = useState(3);
     const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(3);
     const [minPageNumberLimit, setMinPageNumberLimit] = useState(1);
-
-    useEffect(() => {
-        console.log('taskFoundedIndex',taskFoundedIndex);
-        if (taskFoundedIndex !== null && taskFoundedIndex > 0) {
-            setCurrentPage(taskFoundedIndex);
-        }
-    },[taskFoundedIndex, tasksPerPage]);
-
     //working with btns methods
     const handlePrevPageBtn = useCallback(() => {
         if (currentPage === 1) {
@@ -87,6 +85,15 @@ const TasksItem = ({tasks, name}) => {
         }
     },[currentPage, maxPageNumberLimit, maxPageNumberShown, minPageNumberLimit, pagesAmount]);
 
+    useEffect(() => {
+        if (taskFoundedIndex !== null && taskFoundedIndex > 0) {
+            setCurrentPage(taskFoundedIndex);
+            setMaxPageNumberLimit(taskFoundedIndex + 1);
+            setMinPageNumberLimit(taskFoundedIndex - 1);
+            setShowModalFounded(true);
+        }
+    },[taskFoundedIndex]);
+
     const handleBtnPageClick = useCallback((e) => {
         setCurrentPage(+e.currentTarget.id);
     },[])
@@ -104,8 +111,8 @@ const TasksItem = ({tasks, name}) => {
 
                 <TasksClear name={name}/>
             </TaskWithPaginateWrap>
+            {showModalFounded && <TaskModal openModalHandler={showModalFoundedHandler} text="Task found" severity="success" color="#4BAE4F"/>}
         </>
     );
 };
-
 export default React.memo(TasksItem);

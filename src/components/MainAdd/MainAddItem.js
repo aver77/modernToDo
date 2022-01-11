@@ -32,4 +32,4 @@ const MainAddItem = () => {
         </MainWrapper>
     );
 };
-export default React.memo(MainAddItem);
+export default MainAddItem;

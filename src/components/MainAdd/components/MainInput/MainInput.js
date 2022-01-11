@@ -69,5 +69,4 @@ const MainInput = ({inputAddRefHandler, inputAddRef}) => {
         </>
     );
 };
-
 export default React.memo(MainInput);
