@@ -46,9 +46,7 @@ const tasksSlice = createSlice({
             state.pageNumber = null;
         },
         findTask(state, action) {
-            const idx = action.payload;
-            const taskIndex = state.allTasks.findIndex(item => item.id === idx);
-            state.pageNumber = Math.ceil(taskIndex / 4);
+            state.pageNumber = Math.ceil((action.payload + 1) / 4);
         },
         removeAllTasks(state) {
             state.removedTasks = state.allTasks;

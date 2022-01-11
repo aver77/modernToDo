@@ -54,28 +54,20 @@ const Header = ({burgerHandler}) => {
         return result;
     }, [inputFindRef]);
 
-    const findDataHandler = (data) => {
+    const findDataHandler = useCallback((data) => {
         if (data) {
             console.log('data text', data);
-            allTasks.forEach(item => {
-                const itemText = item.taskText.slice(0, data.length);
-                console.log('item text', itemText);
-                if (itemText === data) {
-                    console.log('равный')
-                    // тогда нужно открыть страницу с таском (мб вернуть номер страницы в app и оттуда передать его в таскспейдж)
-                    // поиск с открытием верной страницы
-                    dispatch(findTaskAction(item.id));
-                }
-            })
-        }
-    };
+            const index = allTasks.findIndex(item => item.taskText.slice(0, data.length) === data);
+            console.log(index);
+            dispatch(findTaskAction(index));
+        }     
+    },[allTasks, dispatch]);
 
     const inputFindRefHandler = useCallback(() => {
         const data = inputRefHandler();
         findDataHandler(data);
         inputFindRef.current.value = '';
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[inputFindRef]);
+    },[findDataHandler, inputRefHandler]);
 
     return (
         <HeaderWrapper>

@@ -43,8 +43,9 @@ const TasksItem = ({tasks, name}) => {
     const [minPageNumberLimit, setMinPageNumberLimit] = useState(1);
 
     useEffect(() => {
-        if (taskFoundedIndex !== null) {
-            setCurrentPage(Math.ceil(taskFoundedIndex / tasksPerPage));
+        console.log('taskFoundedIndex',taskFoundedIndex);
+        if (taskFoundedIndex !== null && taskFoundedIndex > 0) {
+            setCurrentPage(taskFoundedIndex);
         }
     },[taskFoundedIndex, tasksPerPage]);
 

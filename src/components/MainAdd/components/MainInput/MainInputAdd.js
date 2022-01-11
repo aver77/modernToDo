@@ -24,13 +24,14 @@ const MainInputAdd = ({inputAddRefHandler, inputAddRef}) => {
 
     const openModalAddHandler = useCallback((value) => {
         setOpenModalAdd(value);
-    },[])
+    },[]);
+
     const clickHandler = () => {
         if (inputAddRef.current.value) {
             openModalAddHandler(true);
         }
         inputAddRefHandler();
-    }
+    };
 
     return (
         <>

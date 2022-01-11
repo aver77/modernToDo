@@ -2,6 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const FooterImgElem = styled.img`
+    height: 32px;
+    width: 32px;
+`;
+
+const FooterHrefElem = styled.a`
     cursor: pointer;
     margin: 4px 6px 0px 4px;
     height: 32px;
@@ -10,11 +15,13 @@ const FooterImgElem = styled.img`
     &:focus,&:hover,&:active {
         opacity: 0.5;
     }
-`;
+`
 
-const FooterImg = ({imgLink,imgAlt}) => {
+const FooterImg = ({imgLink,imgAlt, hrefLink}) => {
     return (
-        <FooterImgElem src={imgLink} alt={imgAlt} />
+        <FooterHrefElem target="noreferrer" href={hrefLink}>
+            <FooterImgElem src={imgLink} alt={imgAlt} />
+        </FooterHrefElem>
     );
 };
 

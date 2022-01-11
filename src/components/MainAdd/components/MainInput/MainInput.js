@@ -46,7 +46,7 @@ const MainInput = ({inputAddRefHandler, inputAddRef}) => {
 
     const openModalAddHandler = useCallback((value) => {
         setOpenModalAdd(value);
-    },[])
+    },[]);
 
     const keyPressAddHandler = (e) => {
         if (e.key === "Enter") {
@@ -54,7 +54,7 @@ const MainInput = ({inputAddRefHandler, inputAddRef}) => {
             openModalAddHandler(true);
             inputAddRefHandler();
         }
-    }
+    };
 
     return (
         <>

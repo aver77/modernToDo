@@ -13,7 +13,9 @@ const FooterImgsText = styled.p`
         }
     }
 `;
-const FooterImgsElems = styled.div``;
+const FooterImgsElems = styled.div`
+    margin-top: 4px;
+`;
 const FooterImagesSection = styled.div``;
 
 const FooterImgs = () => {
@@ -21,8 +23,8 @@ const FooterImgs = () => {
         <FooterImagesSection>
             <FooterImgsText>NW Apps:</FooterImgsText>
             <FooterImgsElems>
-                <FooterImg imgLink={app} imgAlt="NW apps" />
-                <FooterImg imgLink={git} imgAlt="GitHub" />
+                <FooterImg imgLink={app} imgAlt="NW apps" hrefLink='https://nwproject.netlify.app'/>
+                <FooterImg imgLink={git} imgAlt="GitHub" hrefLink='https://github.com/aver77'/>
             </FooterImgsElems>
         </FooterImagesSection>
     );
