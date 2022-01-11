@@ -12,12 +12,17 @@ const BurgerImg = styled.img`
 `;
 
 const HeaderBurgerItem = ({burgerHandler}) => {
+
+    const burgerShowHandler = () => {
+        burgerHandler(true);
+    }
+
     return (
         <BurgerWrapper>
             <BurgerImg
                 src={burgerImg} 
                 alt="burger"
-                onClick = {() => burgerHandler(true)}
+                onClick = {burgerShowHandler}
             />
         </BurgerWrapper>
     );

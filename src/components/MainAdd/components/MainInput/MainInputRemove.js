@@ -28,21 +28,20 @@ const MainInputRemove = ({clearForm}) => {
 
     const [openModalDelete, setOpenModalDelete] = useState(false);
     const [openDialogWarn, setOpenDialogWarn] = useState(false);
-    
+
     const openModalDeleteHandler = useCallback((value) => {
         setOpenModalDelete(value);
     },[]);
-
+    const openWarnDialogHandler = useCallback((value) => {
+        setOpenDialogWarn(value);
+    },[]);
+    
     const removeTasks = () => {
         clearForm();
         if (allTasks && allTasks.length) {
             openWarnDialogHandler(true);
         }
     };
-
-    const openWarnDialogHandler = useCallback((value) => {
-        setOpenDialogWarn(value);
-    },[]);
 
     return (
         <>

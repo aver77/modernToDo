@@ -9,14 +9,12 @@ const HeaderItem = () => {
 
     const burgerHandler = useCallback((value) => {
         setShowBurger(value)
-    }, [setShowBurger]);
+    }, []);
     
     return (
         <>
             <Header burgerHandler={burgerHandler}/>
-            {
-                showBurger?<Burger burgerHandler={burgerHandler}/>:<></>
-            }
+            {showBurger?<Burger burgerHandler={burgerHandler}/>:<></>}
         </>
     );
 };

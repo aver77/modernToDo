@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useRef, useEffect} from 'react';
 import styled from 'styled-components';
 import BurgerImg from './components/BurgerImg';
@@ -22,16 +23,17 @@ const BurgerWrapper = styled.div`
 const Burger = ({burgerHandler}) => {
     const burgerRef = useRef(null);
 
-    useEffect(() => {    
-        const refClickHandler = (e) => {
-            if (burgerRef.current) {
-                if (!burgerRef.current.contains(e.target)) burgerHandler(false)
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (burgerRef.current && !burgerRef.current.contains(event.target)) {
+                burgerHandler(false);
             }
-        } 
-        document.addEventListener('click', refClickHandler);
-
-        return () => document.removeEventListener('click', refClickHandler);
-    }, [burgerHandler]);
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [burgerRef]);
 
     return (
         <BurgerElement ref={burgerRef}>

@@ -14,12 +14,17 @@ const BurgerCloseImg = styled.img`
 `;
 
 const BurgerImg = ({burgerHandler}) => {
+
+    const closeBurger = () => {
+        burgerHandler(false);
+    }
+
     return (
         <BurgerImgWrapper>
             <BurgerCloseImg 
                 src={close} 
                 alt="close"
-                onClick={() => burgerHandler(false)}
+                onClick={closeBurger}
             />
         </BurgerImgWrapper>   
     );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -10,13 +10,13 @@ import { removeAllTasks } from '../../redux/tasksSlice';
 
 const DialogWrap = styled.div`
     position: absolute;
-    z-index: 999;
+    z-index: 9999;
 `;
 
 const TaskDialogRemoveWarn = ({openDialogHandler, openModalHandler = null}) => {
     const dispatch = useDispatch();
 
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = useState(true);
 
     const handleClose = () => {
         setOpen(false);
