@@ -37,5 +37,4 @@ const FooterTextSection = () => {
         </FooterTextSectionElem>
     );
 };
-
 export default React.memo(FooterTextSection);

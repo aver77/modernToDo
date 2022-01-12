@@ -81,5 +81,4 @@ const MainDate = () => {
         </MainDateImgWrapper>
     );
 };
-
 export default React.memo(MainDate);

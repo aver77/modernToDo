@@ -89,5 +89,4 @@ const DefaultView = () => {
         </TasksWrapper>
     );
 };
-
 export default React.memo(DefaultView);

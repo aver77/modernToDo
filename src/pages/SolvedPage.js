@@ -33,5 +33,4 @@ const SolvedPage = () => {
         </TasksPageWrapper>
     );
 };
-
 export default React.memo(SolvedPage);

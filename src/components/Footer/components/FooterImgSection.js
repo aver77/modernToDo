@@ -29,5 +29,4 @@ const FooterImgs = () => {
         </FooterImagesSection>
     );
 };
-
 export default React.memo(FooterImgs);

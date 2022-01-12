@@ -56,5 +56,4 @@ const TaskImageWrapper = ({liked, solved, id, name, openModalDeleteSingleHandler
         </TaskImgWrapper>
     );
 };
-
 export default React.memo(TaskImageWrapper);

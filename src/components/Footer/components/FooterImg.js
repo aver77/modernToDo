@@ -24,5 +24,4 @@ const FooterImg = ({imgLink,imgAlt, hrefLink}) => {
         </FooterHrefElem>
     );
 };
-
 export default React.memo(FooterImg);

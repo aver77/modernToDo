@@ -56,5 +56,4 @@ const MainInputRemove = ({clearForm}) => {
         </>
     );
 };
-
 export default React.memo(MainInputRemove);

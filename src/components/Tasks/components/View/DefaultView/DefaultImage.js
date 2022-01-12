@@ -31,5 +31,4 @@ const DefaultImage = ({imgLink,imgAlt,imgTitle}) => {
         <DefaultTaskImg cursorDefault={"not-allowed"} src={imgLink} alt={imgAlt} title={imgTitle}/>
     );
 };
-
 export default React.memo(DefaultImage);

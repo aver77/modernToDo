@@ -25,5 +25,4 @@ const FooterTitle = () => {
         <FooterTitleElem>NW Project</FooterTitleElem>
     );
 };
-
 export default React.memo(FooterTitle);

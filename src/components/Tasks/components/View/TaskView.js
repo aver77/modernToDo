@@ -64,5 +64,4 @@ const TaskView = ({task, number, name, openModalDeleteSingleHandler}) => {
         </>
     );
 }
-
 export default React.memo(TaskView);

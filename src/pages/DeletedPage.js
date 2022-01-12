@@ -21,5 +21,4 @@ const DeletedPage = () => {
         </TasksPageWrapper>
     );
 };
-
 export default React.memo(DeletedPage);

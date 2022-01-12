@@ -43,5 +43,4 @@ const TasksPaginate = ({pagesAmount, minPageNumberLimit, maxPageNumberLimit, han
     }
     return <></>
 };
-
 export default React.memo(TasksPaginate);

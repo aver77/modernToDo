@@ -18,5 +18,4 @@ const TasksPage = () => {
         </TasksPageWrapper>
     );
 };
-
 export default React.memo(TasksPage);

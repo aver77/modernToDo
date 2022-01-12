@@ -37,5 +37,4 @@ const TasksClear = ({name}) => {
     }
     return <></>
 };
-
 export default React.memo(TasksClear);

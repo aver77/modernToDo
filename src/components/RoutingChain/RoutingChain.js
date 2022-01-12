@@ -29,5 +29,4 @@ const RoutingChain = () => {
         </Router>
     );
 };
-
 export default RoutingChain;
