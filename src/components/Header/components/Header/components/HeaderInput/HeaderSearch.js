@@ -6,11 +6,17 @@ import find from '../../../../../../images/search.png';
 const HeaderElemSearchImg = styled.img`
     position: absolute;
     height: 24px;
-    top:0;
+    bottom:0;
     right: 0;
     transition: 0.3s ease;
     &:focus,&:hover,&:active {
-        opacity: 0.5;
+        opacity: 0.6;
+    }
+    @media screen and (max-width: 1024px),
+    screen and (max-height: 1024px) {
+        &:focus,&:hover,&:active {
+            opacity: 1;
+        }
     }
 `;
 

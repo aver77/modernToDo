@@ -11,6 +11,15 @@ const ClearImg = styled.img`
     width: 36px;
     padding: 5px;
     cursor: pointer;
+    &:focus,&:hover,&:active {
+        opacity: 0.6;
+    };
+    @media screen and (max-width: 1024px),
+    screen and (max-height: 1024px) {
+        &:focus,&:hover,&:active {
+            opacity: 1;
+        }
+    }
 `;
 
 const TasksClear = ({name}) => {

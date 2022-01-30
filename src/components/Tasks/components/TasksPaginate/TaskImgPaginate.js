@@ -9,6 +9,12 @@ const TaskPageImg = styled.img`
     &:focus,&:hover,&:active {
         opacity: 0.6;
     }
+    @media screen and (max-width: 1024px),
+    screen and (max-height: 1024px) {
+        &:focus,&:hover,&:active {
+        opacity: 0.6;
+        }
+    }
 `
 
 const TaskImgPaginate = ({imgLink, imgAlt, pageHandler}) => {

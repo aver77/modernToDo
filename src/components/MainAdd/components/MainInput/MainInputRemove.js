@@ -21,6 +21,12 @@ const MainInputRemoveElem = styled.img`
             height: 26px;
         }
     }
+    @media screen and (max-width: 1024px),
+    screen and (max-height: 1024px) {
+        &:focus,&:hover,&:active {
+            opacity: 1;
+        }
+    }
 `;
 
 const MainInputRemove = ({clearForm}) => {
