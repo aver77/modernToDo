@@ -6,6 +6,7 @@ import TaskModal from '../../../MUIModals/TaskModal';
 const MainInputElem = styled.input`
     margin: 0 32px 0 32px;
     border: 0px;
+    border-radius: 0;
     border-bottom: 2px solid black;
     width: 80%;
     &[type="text"], textarea {

@@ -15,6 +15,12 @@ const FooterHrefElem = styled.a`
     &:focus,&:hover,&:active {
         opacity: 0.5;
     }
+    @media screen and (max-width: 1024px),
+    screen and (max-height: 1024px) {
+        &:focus,&:hover,&:active {
+            opacity: 1;
+        }
+    }
 `
 
 const FooterImg = ({imgLink,imgAlt, hrefLink}) => {

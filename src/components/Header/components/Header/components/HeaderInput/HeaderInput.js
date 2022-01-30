@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const HeaderElemInput = styled.input`
     border: 0px;
     border-bottom: 2px solid black;
+    border-radius: 0;
     width: 300px;
     &[type="text"], textarea {
             background:#EE6E73;
@@ -16,7 +17,7 @@ const HeaderElemInput = styled.input`
 
     @media screen and (max-width: 793px) {
         & {
-            width: 88%;
+            width: 86%;
         }
     }
 `;
